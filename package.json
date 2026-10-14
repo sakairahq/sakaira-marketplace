@@ -7,6 +7,6 @@
   "scripts": {
     "test": "node --test",
     "check:tools": "node scripts/check-skill-tools.mjs",
-    "validate": "claude plugin validate . --strict && claude plugin validate plugins/sakaira --strict"
+    "validate": "npx -y @anthropic-ai/claude-code@latest plugin validate . --strict && npx -y @anthropic-ai/claude-code@latest plugin validate plugins/sakaira --strict"
   }
 }
