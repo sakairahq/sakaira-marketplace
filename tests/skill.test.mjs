@@ -17,9 +17,22 @@ function parse(text) {
   for (const line of match[1].split("\n")) {
     const pair = line.match(/^([a-z-]+): (.+)$/);
     assert.ok(pair, `frontmatter lines must be one-line "key: value", got: ${line}`);
-    fields[pair[1]] = pair[2].replace(/^"(.*)"$/, "$1");
+    fields[pair[1]] = pair[2];
   }
   return { fields, body: match[2] };
+}
+
+/**
+ * Why a one-line value would not parse as itself in YAML (Claude Code and claude.ai read the
+ * frontmatter as YAML), or null. Values stay unquoted, so they must avoid ": ", " #" and a leading
+ * indicator character.
+ */
+function plainYamlProblem(value) {
+  if (value.includes(": ")) return 'contains ": ", which YAML reads as a mapping';
+  if (value.includes(" #")) return 'contains " #", which YAML reads as a comment';
+  if (/^[>|'"[\]{}&*!%@`#,?:-]/.test(value)) return `starts with the indicator ${value[0]}`;
+  if (value !== value.trim()) return "has leading or trailing spaces";
+  return null;
 }
 
 test("the plugin has exactly one skill, sakaira", () => {
@@ -56,4 +69,30 @@ test("it sends the user to connect when the tools are missing, and agents to the
 test("it copies no prices: the catalog is read live", () => {
   const prices = body.match(/\b\d[\d,.]*\s*credits?\b/g) ?? [];
   assert.deepEqual(prices.filter((p) => p !== "500 credits"), []);
+});
+
+test("it looks for Sakaira's tools and its sign-in before sending the user to connect again", () => {
+  assert.match(body, /search your tools for "sakaira"/i);
+  assert.match(body, /\/mcp/);
+});
+
+test("it checks a job named by an internal error before calling again, which could charge twice", () => {
+  assert.match(body, /internal[^\n]*`get_job`[^\n]*before/i);
+});
+
+test("it sets the parameters that change what music and voiceovers come out as", () => {
+  assert.match(body, /instrumental/);
+  assert.match(body, /\bstyle\b/);
+});
+
+test("the YAML check rejects plain values a YAML parser rejects or cuts short", () => {
+  assert.equal(plainYamlProblem("Make images. Use when asked."), null);
+  assert.match(plainYamlProblem("Triggers: make images"), /": "/);
+  assert.match(plainYamlProblem("Sakaira tools #media. Use when"), /" #"/);
+  assert.match(plainYamlProblem("> folded"), /indicator/);
+  assert.match(plainYamlProblem("'quoted"), /indicator/);
+});
+
+test("every frontmatter value is a plain YAML scalar that parses to itself", () => {
+  for (const [key, value] of Object.entries(fields)) assert.equal(plainYamlProblem(value), null, key);
 });

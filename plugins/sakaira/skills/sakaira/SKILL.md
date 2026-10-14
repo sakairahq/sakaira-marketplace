@@ -10,7 +10,7 @@ Sakaira is a remote MCP server with the top AI image, video and audio models. Th
 
 ## 1. Check that Sakaira is connected
 
-If tools such as `create_image` and `check_balance` aren't available, say that Sakaira isn't connected yet and link https://sakaira.com/connect, which has a one-minute guide for each assistant. Never describe a file as made when no tool made it.
+If you don't see tools such as `create_image` and `check_balance`, search your tools for "sakaira" first: some assistants keep them behind a search. If Sakaira is listed but needs sign-in, ask the user to sign in (in Claude Code: type /mcp and choose sakaira). Only when it isn't there at all, say that Sakaira isn't connected yet and link https://sakaira.com/connect, which has a one-minute guide for each assistant. Never describe a file as made when no tool made it.
 
 ## 2. Brand first
 
@@ -57,8 +57,8 @@ Turn the request into a full prompt. Keep the user's own words, names and any te
 - **Image:** subject, setting, style or medium, lighting, composition, colors; text to show goes in quotes. Set the size with the width and height parameters, not in the prompt.
 - **Image edit:** pass the image as image_url and say only what changes and what must stay.
 - **Video:** one shot: the subject, what happens, the camera's movement, the setting, light and sound. Set duration, aspect_ratio and resolution as parameters. For a product or a character, pass its image as image_url (the first frame) or in reference_image_urls.
-- **Voiceover:** the exact script, punctuated for the pauses you want, and a voice from `describe_model`.
-- **Music:** genre, mood, tempo, instruments and length; lyrics only when the user wants vocals.
+- **Voiceover:** the exact script, punctuated for the pauses you want, and a voice from `describe_model`. Where the model takes a style, say how to read it ("warm and slow").
+- **Music:** genre, mood, tempo, instruments and length. For background music, set instrumental to true, since some models sing by default; give lyrics only when the user wants vocals.
 
 Tell the user in one sentence what you're about to make. Don't ask questions that the defaults answer.
 
@@ -68,7 +68,7 @@ Tell the user in one sentence what you're about to make. Don't ask questions tha
 - Videos and other long jobs return a job_id. Call `get_job` with it until the status is succeeded or failed; a video takes about 1–5 minutes.
 - A job above 500 credits returns a quote instead of running. Show the quote, and call again with confirm set to true only after the user agrees.
 - If a reply is lost or times out, call `get_job` without a job_id to find the job. Don't generate again: that would charge twice.
-- On an error, read its retryable flag and message. Fix the field an invalid_input names and call again. With too_many_active_jobs, wait for a job to finish. With insufficient_credits, tell the user: `check_balance` shows their credits, and `buy_credits` is only for when they ask to buy.
+- On an error, read its retryable flag and message. With internal, if the message names a job, call `get_job` before calling again: the job may have finished and been charged. Fix the field an invalid_input names and call again. With tool_disabled, pick another model. With too_many_active_jobs, wait for a job to finish. With insufficient_credits, tell the user: `check_balance` shows their credits, and `buy_credits` is only for when they ask to buy.
 
 ## 7. Report and iterate
 

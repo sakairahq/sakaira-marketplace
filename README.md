@@ -42,7 +42,7 @@ Customize → Plugins → Add marketplace → `sakairahq/sakaira-marketplace`. I
 codex plugin marketplace add sakairahq/sakaira-marketplace
 ```
 
-Then type `/plugins` in Codex, install Sakaira and sign in when it asks.
+Then type `/plugins` in Codex, install Sakaira and sign in when it asks. Already added Sakaira with `codex mcp add`? Remove it first (`codex mcp remove sakaira`) so the tools don't show up twice.
 
 **Hermes Agent**
 

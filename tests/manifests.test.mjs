@@ -52,32 +52,42 @@ test("the three plugin manifests describe the same plugin", () => {
 });
 
 test("each marketplace lists only the sakaira plugin, in plugins/sakaira", () => {
-  const claude = read(".claude-plugin/marketplace.json");
-  assert.equal(claude.name, MARKETPLACE);
-  assert.equal(claude.owner?.name, "Sakaira");
-  assert.equal(claude.plugins.length, 1);
-  assert.equal(claude.plugins[0].name, NAME);
-  assert.equal(claude.plugins[0].source, "./plugins/sakaira");
-  assert.equal(claude.plugins[0].version, VERSION);
-  assert.equal(claude.plugins[0].description, DESCRIPTION);
+  const claudeFile = ".claude-plugin/marketplace.json";
+  const claude = read(claudeFile);
+  assert.equal(claude.name, MARKETPLACE, claudeFile);
+  assert.equal(claude.version, VERSION, claudeFile);
+  assert.equal(claude.owner?.name, "Sakaira", claudeFile);
+  assert.equal(claude.plugins.length, 1, claudeFile);
+  assert.equal(claude.plugins[0].name, NAME, claudeFile);
+  assert.equal(claude.plugins[0].source, "./plugins/sakaira", claudeFile);
+  assert.equal(claude.plugins[0].version, VERSION, claudeFile);
+  assert.equal(claude.plugins[0].description, DESCRIPTION, claudeFile);
 
-  const cursor = read(".cursor-plugin/marketplace.json");
-  assert.equal(cursor.name, MARKETPLACE);
-  assert.deepEqual(cursor.owner, { name: "Sakaira", email: "supportappsmaker@gmail.com" });
-  assert.equal(cursor.plugins.length, 1);
-  assert.equal(cursor.plugins[0].name, NAME);
-  assert.equal(cursor.plugins[0].source, "plugins/sakaira");
+  const cursorFile = ".cursor-plugin/marketplace.json";
+  const cursor = read(cursorFile);
+  assert.equal(cursor.name, MARKETPLACE, cursorFile);
+  assert.deepEqual(cursor.owner, { name: "Sakaira", email: "supportappsmaker@gmail.com" }, cursorFile);
+  assert.equal(cursor.plugins.length, 1, cursorFile);
+  assert.equal(cursor.plugins[0].name, NAME, cursorFile);
+  assert.equal(cursor.plugins[0].source, "plugins/sakaira", cursorFile);
+  assert.equal(cursor.plugins[0].description, DESCRIPTION, cursorFile);
 
-  const codexMarket = read(".agents/plugins/marketplace.json");
-  assert.equal(codexMarket.name, MARKETPLACE);
-  assert.equal(codexMarket.plugins.length, 1);
-  assert.equal(codexMarket.plugins[0].name, NAME);
-  assert.deepEqual(codexMarket.plugins[0].source, { source: "local", path: "./plugins/sakaira" });
-  assert.deepEqual(codexMarket.plugins[0].policy, {
-    installation: "AVAILABLE",
-    authentication: "ON_INSTALL",
-  });
-  assert.equal(codexMarket.plugins[0].category, "Creativity");
+  const codexFile = ".agents/plugins/marketplace.json";
+  const codexMarket = read(codexFile);
+  assert.equal(codexMarket.name, MARKETPLACE, codexFile);
+  assert.equal(codexMarket.plugins.length, 1, codexFile);
+  assert.equal(codexMarket.plugins[0].name, NAME, codexFile);
+  assert.deepEqual(
+    codexMarket.plugins[0].source,
+    { source: "local", path: "./plugins/sakaira" },
+    codexFile,
+  );
+  assert.deepEqual(
+    codexMarket.plugins[0].policy,
+    { installation: "AVAILABLE", authentication: "ON_INSTALL" },
+    codexFile,
+  );
+  assert.equal(codexMarket.plugins[0].category, "Creativity", codexFile);
 });
 
 test("both MCP files declare only the sakaira server, at the production URL", () => {
