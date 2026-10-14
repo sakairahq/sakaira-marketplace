@@ -101,4 +101,4 @@ Every tool's parameters, the credit rules and the error codes are at [sakaira.co
 
 ## Contributing
 
-Run `npm test` (manifests and skill rules) and `npm run check:tools` (every tool the skill names is live) before a pull request; `npm run validate` runs Claude Code's plugin validator. In SKILL.md, write tool names in backticks and parameters without them. Apache-2.0.
+Run `npm test` (manifests and skill rules) and `npm run check:tools` (every tool the skill names is live) before a pull request; `npm run validate` runs Claude Code's plugin validator. In SKILL.md, write tool names in backticks and parameters without them. sakaira.com serves a copy of the skill at `/.well-known/agent-skills/sakaira/SKILL.md`, so a change here is copied there too. Apache-2.0.
