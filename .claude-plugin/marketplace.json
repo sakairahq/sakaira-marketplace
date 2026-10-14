@@ -1,0 +1,16 @@
+{
+  "name": "sakaira-marketplace",
+  "description": "Plugins and skills that connect AI assistants to Sakaira, the remote MCP server for AI images, video, voice and music.",
+  "version": "1.0.0",
+  "owner": { "name": "Sakaira", "url": "https://sakaira.com" },
+  "plugins": [
+    {
+      "name": "sakaira",
+      "source": "./plugins/sakaira",
+      "description": "Make AI images, video, voiceovers and music, and edit video, from your assistant. Paid in credits.",
+      "version": "1.0.0",
+      "category": "creative",
+      "tags": ["image", "video", "voice", "music"]
+    }
+  ]
+}

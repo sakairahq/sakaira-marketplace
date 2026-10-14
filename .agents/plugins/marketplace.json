@@ -1,0 +1,12 @@
+{
+  "name": "sakaira-marketplace",
+  "interface": { "displayName": "Sakaira" },
+  "plugins": [
+    {
+      "name": "sakaira",
+      "source": { "source": "local", "path": "./plugins/sakaira" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Creativity"
+    }
+  ]
+}

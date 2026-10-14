@@ -1,0 +1,35 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "sakaira",
+  "version": "1.0.0",
+  "description": "Make AI images, video, voiceovers and music, and edit video, from your assistant. Paid in credits.",
+  "author": { "name": "Sakaira", "url": "https://sakaira.com" },
+  "homepage": "https://sakaira.com",
+  "repository": "https://github.com/sakairahq/sakaira-marketplace",
+  "license": "Apache-2.0",
+  "keywords": ["mcp", "mcp-server", "remote-mcp", "ai-image-generation", "ai-video", "text-to-speech", "image", "video", "voice", "music"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Sakaira",
+        "shortDescription": "AI images, video and voice",
+        "longDescription": "Sakaira is a remote MCP server that gives Claude, ChatGPT and other AI assistants access to the top AI image, video and audio models. Ask in plain words and get a link to the file: images with Nano Banana, GPT Image or FLUX, videos with Veo, Kling or Seedance, voiceovers with ElevenLabs, music with Lyria, plus background removal, upscaling, photo restoration, transcription and seven video edits (trim, resize, GIF, stills, MP3, mute, join). Sign-in is OAuth 2.1 with Google or email, with no API key. Every result carries its cost in credits and the balance left. 100 free credits to start.",
+        "developerName": "Sakaira",
+        "category": "Creativity",
+        "capabilities": ["Interactive", "Write"],
+        "websiteURL": "https://sakaira.com",
+        "supportURL": "https://sakaira.com/support",
+        "privacyPolicyURL": "https://sakaira.com/privacy",
+        "termsOfServiceURL": "https://sakaira.com/terms",
+        "defaultPrompt": [
+          "Check my Sakaira balance",
+          "Make a 1:1 flat-vector icon of a paper plane in my brand colors"
+        ],
+        "brandColor": "#4d7c0f",
+        "brandColorDark": "#c6f135",
+        "composerIcon": "./assets/logo.svg",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "sakaira-marketplace",
+  "owner": { "name": "Sakaira", "email": "supportappsmaker@gmail.com" },
+  "metadata": {
+    "description": "Plugins and skills that connect AI assistants to Sakaira, the remote MCP server for AI images, video, voice and music."
+  },
+  "plugins": [
+    {
+      "name": "sakaira",
+      "source": "plugins/sakaira",
+      "description": "Make AI images, video, voiceovers and music, and edit video, from your assistant. Paid in credits."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "sakaira",
+  "displayName": "Sakaira",
+  "version": "1.0.0",
+  "description": "Make AI images, video, voiceovers and music, and edit video, from your assistant. Paid in credits.",
+  "author": { "name": "Sakaira" },
+  "homepage": "https://sakaira.com",
+  "repository": "https://github.com/sakairahq/sakaira-marketplace",
+  "license": "Apache-2.0",
+  "keywords": ["mcp", "mcp-server", "remote-mcp", "ai-image-generation", "ai-video", "text-to-speech", "image", "video", "voice", "music"],
+  "logo": "assets/logo.png",
+  "mcpServers": "./.mcp.json"
+}
