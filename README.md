@@ -19,6 +19,60 @@ You ask your assistant in plain words. Sakaira makes the file and returns a link
 
 69 models, including Nano Banana, GPT Image, FLUX, Veo, Kling, Seedance, ElevenLabs and Lyria. Every model and its price: [sakaira.com/models](https://sakaira.com/models).
 
+## Install the plugin
+
+The `sakaira` plugin adds the Sakaira server and a skill that helps your assistant pick the model, write the prompt and finish the job. Sign-in happens in your browser the first time a tool runs.
+
+**Claude Code**
+
+```sh
+claude plugin marketplace add sakairahq/sakaira-marketplace
+claude plugin install sakaira@sakaira-marketplace
+```
+
+Or, inside a session on Claude Code 2.1.275 or later, in one step: `/plugin install sakaira --marketplace sakairahq/sakaira-marketplace`. Then type `/mcp`, choose sakaira and sign in. Already added Sakaira with `claude mcp add`? Remove it first (`claude mcp remove sakaira`) so the tools don't show up twice.
+
+**Claude on the web and desktop (paid plans)**
+
+Customize → Plugins → Add marketplace → `sakairahq/sakaira-marketplace`. Install Sakaira, then click **Connect** on its Connectors tab. On the Free plan, add the connector instead: [sakaira.com/connect/claude](https://sakaira.com/connect/claude).
+
+**Codex**
+
+```sh
+codex plugin marketplace add sakairahq/sakaira-marketplace
+```
+
+Then type `/plugins` in Codex, install Sakaira and sign in when it asks.
+
+**Hermes Agent**
+
+```sh
+hermes mcp add sakaira --url https://mcp.sakaira.com/mcp --auth oauth --connect-timeout 300
+hermes plugins install sakairahq/sakaira-marketplace/plugins/sakaira --enable
+```
+
+The first line adds the server and signs you in; the second adds the skill.
+
+**OpenClaw**
+
+```sh
+openclaw mcp add sakaira --url https://mcp.sakaira.com/mcp --transport streamable-http --auth oauth
+openclaw mcp login sakaira
+openclaw plugins install sakaira --marketplace sakairahq/sakaira-marketplace --accept-capabilities
+```
+
+The first two lines add the server and sign you in; the third adds the skill.
+
+**Cursor and Grok Bot**
+
+The plugin is on its way to the Cursor Marketplace. Until then, Cursor connects in one click at [sakaira.com/connect/cursor](https://sakaira.com/connect/cursor).
+
+**Only the skill, for any agent**
+
+```sh
+npx skills add sakairahq/sakaira-marketplace
+```
+
 ## Connect
 
 The server URL is `https://mcp.sakaira.com/mcp` (Streamable HTTP). Sign-in is OAuth 2.1, in your browser, with Google or your email. There is no API key.
@@ -35,3 +89,16 @@ You start with 100 free credits. Plans are from $19 a month. See [sakaira.com/pr
 ## For agents and developers
 
 Every tool's parameters, the credit rules and the error codes are at [sakaira.com/mcp](https://sakaira.com/mcp), with a Markdown copy at [sakaira.com/mcp.md](https://sakaira.com/mcp.md). The whole catalog is in one file at [sakaira.com/llms-full.txt](https://sakaira.com/llms-full.txt).
+
+## What's inside
+
+| Path | For |
+| --- | --- |
+| `.claude-plugin/marketplace.json`, `plugins/sakaira/.claude-plugin/plugin.json`, `plugins/sakaira/.mcp.json` | Claude Code and Claude |
+| `.cursor-plugin/marketplace.json`, `plugins/sakaira/.cursor-plugin/plugin.json` | Cursor and Grok Bot |
+| `.agents/plugins/marketplace.json`, `plugins/sakaira/plugin.json`, `plugins/sakaira/mcp.json` | Codex, Hermes and other [Agent Plugins](https://agent-plugins.org) clients |
+| `plugins/sakaira/skills/sakaira/SKILL.md` | The skill, for every client |
+
+## Contributing
+
+Run `npm test` (manifests and skill rules) and `npm run check:tools` (every tool the skill names is live) before a pull request; `npm run validate` runs Claude Code's plugin validator. In SKILL.md, write tool names in backticks and parameters without them. Apache-2.0.
