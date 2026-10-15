@@ -98,6 +98,7 @@ Every tool's parameters, the credit rules and the error codes are at [sakaira.co
 | `.cursor-plugin/marketplace.json`, `plugins/sakaira/.cursor-plugin/plugin.json` | Cursor and Grok Bot |
 | `.agents/plugins/marketplace.json`, `plugins/sakaira/plugin.json`, `plugins/sakaira/mcp.json` | Codex, Hermes and other [Agent Plugins](https://agent-plugins.org) clients |
 | `plugins/sakaira/skills/sakaira/SKILL.md` | The skill, for every client |
+| `AGENTS.md` | AI coding agents working on this repo |
 
 ## Contributing
 
